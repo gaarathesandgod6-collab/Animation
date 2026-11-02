@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Animation Portfolio Levels</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#c2410c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Animation Levels">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#faf6ef;--card:#fff;--ink:#2a2620;--mute:#6f675b;--line:#e4dccd;--acc:#c2410c;--acc2:#fde6d8;--ok:#2f7d4f;--lock:#bdb4a4}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#1c1915;--card:#26221c;--ink:#f2ece1;--mute:#a79e8e;--line:#3a352c;--acc:#ff8a4c;--acc2:#3b2a1f;--ok:#6fcf97;--lock:#554e42}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Georgia,"Times New Roman",serif;max-width:640px;margin-inline:auto;padding:16px}
+h1{font-size:26px;margin:8px 0 2px;letter-spacing:-.3px}
+h2{font-size:18px;margin:0}
+h3{font:700 12px/1 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--mute);margin:16px 0 6px}
+p{margin:4px 0}.mute{color:var(--mute);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0}
+.bar{height:8px;background:var(--line);border-radius:8px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:var(--acc);transition:width .3s}
+button,input,select{font:inherit}
+button{background:var(--acc);color:#fff;border:0;border-radius:10px;padding:11px 14px;font-weight:700;width:100%;margin-top:10px;cursor:pointer}
+button:disabled{background:var(--lock);cursor:default}
+button.ghost{background:transparent;color:var(--mute);border:1px solid var(--line);font-weight:400}
+input[type=text],select{width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);margin:4px 0 8px}
+.head{display:flex;align-items:center;gap:10px;cursor:pointer}
+.badge{flex:none;width:34px;height:34px;border-radius:50%;background:var(--acc2);color:var(--acc);display:grid;place-items:center;font:700 15px system-ui,sans-serif}
+.done .badge{background:var(--ok);color:#fff}.locked{opacity:.55}.locked .badge{background:var(--line);color:var(--mute)}
+.warn{background:var(--acc2);border:1px solid var(--acc);border-radius:12px;padding:12px;margin:12px 0}
+ul{margin:0;padding-left:20px}li{margin:3px 0}
+label.ck{display:flex;gap:10px;align-items:flex-start;margin:7px 0;font-size:15px}
+label.ck input{width:20px;height:20px;margin-top:2px;accent-color:var(--acc);flex:none}
+.dots{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.dots b{width:24px;height:24px;border-radius:50%;border:2px solid var(--line)}.dots b.on{background:var(--acc);border-color:var(--acc)}
+.res a{color:var(--acc);text-decoration:none;font-weight:700}
+.res li{font-size:15px}.tag{font:700 10px system-ui,sans-serif;text-transform:uppercase;background:var(--line);color:var(--mute);border-radius:5px;padding:2px 5px;margin-right:6px}
+.timer{text-align:center;margin-top:12px}#tm{font:700 54px system-ui,sans-serif;letter-spacing:2px;font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<h1>✏️ Animation Portfolio Levels</h1>
+<p class="mute">Six levels, 14 practice days, one finished portfolio. Progress saves on this device.</p>
+<div id="app"></div>
+<script>
+var LV=[
+{t:"Gesture & Line of Action",d:2,goal:"Capture movement, weight and balance fast, before detail.",
+ dr:["10 × 30-second poses","5 × 1-minute poses","3 × 2-minute poses","1 × 5-minute pose with a clear line of action"],
+ ck:["Filled 3+ gesture sheets","I can spot the line of action before drawing","Photographed my 2 best sheets"],
+ rs:[["tool","Line of Action (pose timer)","https://line-of-action.com"],["tool","Quickposes (gesture timer)","https://quickposes.com"],["video","Proko: gesture drawing","gesture drawing tutorial proko"],["book","Drawn to Life, Walt Stanchfield","Drawn to Life Stanchfield"],["book","Force: Dynamic Life Drawing, Mike Mattesi","Force dynamic life drawing Mattesi"]]},
+{t:"Construction & Anatomy",d:3,goal:"Build figures from simple forms over a real skeleton and muscle map. Your Biology head start.",
+ dr:["Ribcage + pelvis boxes, 10 quick drafts","Hands: 12 studies from your own hand","3 figures with the skeleton drawn underneath","One annotated skeleton page, labelled like a biology diagram"],
+ ck:["3 figures with visible anatomy notes","One full hands page","One annotated skeleton page"],
+ rs:[["video","Proko: figure drawing fundamentals","proko figure drawing fundamentals"],["video","Drawabox-style construction","drawing from imagination construction basics"],["tool","Drawabox (free lessons)","https://drawabox.com"],["book","Constructive Anatomy, George Bridgman","Constructive Anatomy Bridgman"],["book","Figure Drawing: Design and Invention, Hampton","Figure Drawing Design and Invention Hampton"]]},
+{t:"Character & Expression",d:2,goal:"Show you can design a character and keep it consistent and alive.",
+ dr:["Turnaround: 5 angles, same proportions","6 expressions: happy, sad, angry, scared, sly, tired","Before / peak / after action poses","Silhouette test: shrink it, is it still readable?"],
+ ck:["Finished turnaround sheet","Finished expression sheet","Acting poses: before, peak, after"],
+ rs:[["video","Character turnaround tutorial","character turnaround sheet tutorial"],["video","Animation acting poses","animation acting poses silhouette tutorial"],["book","Creating Characters with Personality, Tom Bancroft","Creating Characters with Personality Bancroft"],["book","The Animator’s Survival Kit, Richard Williams","Animator's Survival Kit Williams"]]},
+{t:"Environment & Light",d:2,goal:"Place your character in believable space with a clear light source. Your Physics head start.",
+ dr:["1-point and 2-point perspective boxes","One object under 3 light directions","2 backgrounds, each with a labelled light source","Foreground / midground / background value study"],
+ ck:["Perspective practice page done","Light study page done","2 finished backgrounds"],
+ rs:[["video","Perspective for artists","perspective drawing tutorial 2 point"],["video","Value and light studies","light and shadow drawing tutorial values"],["book","Perspective Made Easy, Ernest Norling","Perspective Made Easy Norling"],["book","Color and Light, James Gurney","Color and Light Gurney"]]},
+{t:"Storytelling & Storyboard",d:3,goal:"Prove you think in shots, timing and cause and effect.",
+ dr:["20 tiny thumbnails for one idea, pick the best","6 to 9 panel storyboard: beginning, middle, end","Vary shots: wide, medium, close-up","Timing study: draw a bouncing ball in 8 key positions"],
+ ck:["20 thumbnails done","Storyboard with a clear beginning, middle and end","Bouncing ball timing page"],
+ rs:[["video","Storyboarding basics","storyboarding basics for animation shots"],["video","12 principles of animation","12 principles of animation explained"],["book","Understanding Comics, Scott McCloud","Understanding Comics McCloud"],["book","Framed Ink, Marcos Mateu-Mestre","Framed Ink Mateu-Mestre"]]},
+{t:"Portfolio & UCAS",d:2,goal:"Photograph, assemble 10 to 15 slides, finish the personal statement.",
+ dr:["Photograph in daylight, flat, no shadows","Build slides: life drawing, character, storyboard, environment, sketchbook, process","Draft the STEM paragraph with one example each from Bio, Chem, Physics","Proofread, get a teacher to read it, submit"],
+ ck:["10 to 15 slides assembled","Personal statement finished and proofread","Confirmed MMU portfolio requirements","UCAS application submitted"],
+ rs:[["tool","MMU BA Animation page","https://www.mmu.ac.uk/study/undergraduate/course/ba-animation/september-2027/"],["video","UCAS personal statement guide","UCAS personal statement three questions"],["video","Art portfolio photographing tips","how to photograph artwork for portfolio phone"]]}
+];
+var KEY="animLevels.v1",S={pledged:false,min:45,pen:"",logs:{},ck:{},open:-1,sure:false};
+try{var r=localStorage.getItem(KEY);if(r)S=Object.assign(S,JSON.parse(r))}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function today(){return new Date().toLocaleDateString("en-CA")}
+function lg(i){return S.logs[i]||[]}
+function done(i){var L=LV[i];if(lg(i).length<L.d)return false;for(var k=0;k<L.ck.length;k++)if(!S.ck[i+"-"+k])return false;return true}
+function unlocked(i){return i===0||done(i-1)}
+function cur(){for(var i=0;i<LV.length;i++)if(!done(i))return i;return LV.length}
+function allDates(){var a=[];for(var i in S.logs)a=a.concat(S.logs[i]);return a.sort()}
+function gap(){var a=allDates();if(!a.length)return 0;return Math.floor((new Date(today())-new Date(a[a.length-1]))/864e5)}
+function streak(){var a=allDates().filter(function(v,i,x){return x.indexOf(v)===i}),n=0,d=new Date(today());
+ if(a.indexOf(today())<0)d.setDate(d.getDate()-1);
+ while(a.indexOf(d.toLocaleDateString("en-CA"))>=0){n++;d.setDate(d.getDate()-1)}return n}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function link(r){var u=r[0]==="video"?"https://www.youtube.com/results?search_query="+encodeURIComponent(r[2]):r[0]==="book"?"https://openlibrary.org/search?q="+encodeURIComponent(r[2]):r[2];
+ return '<li><span class="tag">'+r[0]+'</span><a href="'+u+'" target="_blank" rel="noopener noreferrer">'+esc(r[1])+'</a></li>'}
+var T=S.t||{run:false,end:0,left:S.min*60},iv=null;
+function fmt(x){x=Math.max(0,Math.ceil(x));return String(Math.floor(x/60)).padStart(2,"0")+":"+String(x%60).padStart(2,"0")}
+function remain(){return T.run?(T.end-Date.now())/1000:T.left}
+function sv(){S.t=T;save()}
+function beep(){try{var a=new (window.AudioContext||window.webkitAudioContext)(),o=a.createOscillator();o.connect(a.destination);o.frequency.value=660;o.start();setTimeout(function(){o.stop()},700)}catch(e){}try{navigator.vibrate&&navigator.vibrate([300,150,300])}catch(e){}}
+function tick(){var e=document.getElementById("tm"),r=remain();if(e)e.textContent=fmt(r);if(T.run&&r<=0){T.run=false;T.left=S.min*60;clearInterval(iv);sv();beep();finish()}}
+function finish(){var i=cur();if(i<LV.length&&allDates().indexOf(today())<0&&lg(i).length<LV[i].d){S.logs[i]=lg(i).concat([today()]);if(done(i)&&i<LV.length-1)S.open=i+1}save();render()}
+function render(){
+ var A=document.getElementById("app"),h="";
+ if(!S.pledged){
+  h='<div class="card"><h2>Sign your commitment</h2><p class="mute">Slacking is easiest when nothing is at stake. Set your rules once; the app holds you to them.</p>'+
+  '<h3>Minutes of drawing per practice day</h3><select id="min"><option>30</option><option>45</option><option>60</option><option>90</option></select>'+
+  '<h3>If I skip 2 days in a row, I will…</h3><input type="text" id="pen" placeholder="e.g. no phone after 6pm until I catch up">'+
+  '<label class="ck"><input type="checkbox" id="oath"><span>I promise to draw for real, log honestly, and not unlock a level until I have earned it.</span></label>'+
+  '<button id="sign">Start Level 1</button></div>';
+  A.innerHTML=h;document.getElementById("min").value=S.min;
+  document.getElementById("sign").onclick=function(){
+   if(!document.getElementById("oath").checked)return;
+   S.min=+document.getElementById("min").value;T={run:false,left:S.min*60,end:0};S.pen=document.getElementById("pen").value.trim()||"hand my phone to a friend for an evening";
+   S.pledged=true;S.open=0;save();render()};return}
+ var c=cur(),total=LV.reduce(function(a,l){return a+l.d},0),got=LV.reduce(function(a,l,i){return a+Math.min(lg(i).length,l.d)},0);
+ h+='<div class="card"><h2>'+(c>=LV.length?"All levels cleared 🎉":"Now on Level "+(c+1)+": "+LV[c].t)+'</h2>'+
+  '<p class="mute">'+got+" of "+total+" practice days · streak "+streak()+' 🔥 · pledge '+S.min+' min/day</p><div class="bar"><i style="width:'+Math.round(got/total*100)+'%"></i></div></div>';
+ if(gap()>=2&&c<LV.length)h+='<div class="warn"><b>You’ve slipped '+gap()+' days.</b> Your pledge: <i>'+esc(S.pen)+'</i>. Do it, then log today to get back on track.</div>';
+ LV.forEach(function(L,i){
+  var d=done(i),u=unlocked(i),o=S.open===i&&u;
+  h+='<div class="card '+(d?"done":!u?"locked":"")+'"><div class="head" data-i="'+i+'"><div class="badge">'+(d?"✓":u?i+1:"🔒")+'</div><div><h2>'+L.t+'</h2><p class="mute">'+L.d+" practice days"+(d?" · cleared":!u?" · clear the previous level":"")+'</p></div></div>';
+  if(o){
+   h+='<p style="margin-top:10px">'+L.goal+'</p><h3>Daily drills</h3><ul>'+L.dr.map(function(x){return"<li>"+x+"</li>"}).join("")+"</ul>"+
+   '<h3>Level-up checklist</h3>'+L.ck.map(function(x,k){return'<label class="ck"><input type="checkbox" data-c="'+i+"-"+k+'"'+(S.ck[i+"-"+k]?" checked":"")+'><span>'+x+"</span></label>"}).join("")+
+   '<h3>Days logged ('+lg(i).length+"/"+L.d+')</h3><div class="dots">'+Array.apply(null,Array(L.d)).map(function(_,k){return'<b class="'+(k<lg(i).length?"on":"")+'"></b>'}).join("")+"</div>";
+   var did=allDates().indexOf(today())>=0;
+   if(lg(i).length<L.d){
+    if(did)h+='<button disabled>Logged today ✓ come back tomorrow</button>';
+    else{if(i===c)h+='<div class="timer"><div id="tm">'+fmt(remain())+'</div><button data-t="go">'+(T.run?"Pause":T.left<S.min*60?"Resume":"Start "+S.min+"-minute timer")+'</button>'+(T.run||T.left<S.min*60?'<button class="ghost" data-t="rs">Reset</button>':"")+'</div>';
+    h+='<button class="ghost" data-l="'+i+'">Log manually (no timer)</button>'}}
+   h+=d?'<p class="mute" style="margin-top:10px">Level cleared. Next level is open.</p>':"";
+   h+='<h3>Learn from</h3><ul class="res">'+L.rs.map(link).join("")+"</ul>"}
+  h+="</div>"});
+ h+='<h3>Backup</h3><button class="ghost" id="exp">Export backup file</button><button class="ghost" onclick="document.getElementById(\'imp\').click()">Import backup file</button><input type="file" id="imp" accept=".json,application/json" hidden>';
+ h+='<button class="ghost" id="reset">'+(S.sure?"Tap again to erase all progress":"Reset everything")+"</button>";
+ A.innerHTML=h;
+ A.querySelectorAll(".head").forEach(function(e){e.onclick=function(){var i=+e.dataset.i;if(unlocked(i)){S.open=S.open===i?-1:i;save();render()}}});
+ A.querySelectorAll("[data-c]").forEach(function(e){e.onchange=function(){S.ck[e.dataset.c]=e.checked;save();render()}});
+ A.querySelectorAll("[data-l]").forEach(function(e){e.onclick=function(){var i=+e.dataset.l;S.logs[i]=lg(i).concat([today()]);if(done(i)&&i<LV.length-1)S.open=i+1;save();render()}});
+ A.querySelectorAll("[data-t]").forEach(function(e){e.onclick=function(){
+  if(e.dataset.t==="rs"){clearInterval(iv);T={run:false,left:S.min*60,end:0}}
+  else if(T.run){T.left=remain();T.run=false;clearInterval(iv)}
+  else{T.run=true;T.end=Date.now()+T.left*1000;clearInterval(iv);iv=setInterval(tick,500);try{navigator.wakeLock&&navigator.wakeLock.request("screen")}catch(x){}}
+  sv();render()}});
+ document.getElementById("exp").onclick=function(){try{var b=new Blob([JSON.stringify(S)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="animation-progress-"+today()+".json";document.body.appendChild(a);a.click();a.remove()}catch(x){}};
+ document.getElementById("imp").onchange=function(ev){var f=ev.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var d=JSON.parse(r.result);if(!d||typeof d.logs!=="object"||typeof d.ck!=="object")throw 0;S=Object.assign(S,d);T=S.t||{run:false,left:S.min*60,end:0};clearInterval(iv);if(T.run)iv=setInterval(tick,500);save();render()}catch(x){alert("That file is not a valid backup.")}};r.readAsText(f)};
+ tick();
+ document.getElementById("reset").onclick=function(){if(S.sure){try{localStorage.removeItem(KEY)}catch(e){}S={pledged:false,min:45,pen:"",logs:{},ck:{},open:-1,sure:false};T={run:false,left:2700,end:0}}else S.sure=true;render()};
+}
+if(S.open===-1&&S.pledged)S.open=Math.min(cur(),LV.length-1);
+if(T.run)iv=setInterval(tick,500);
+render();
+if("serviceWorker" in navigator&&location.protocol.indexOf("http")===0)navigator.serviceWorker.register("sw.js").catch(function(){});
+</script>
+</body>
+</html>
